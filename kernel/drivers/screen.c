@@ -1,7 +1,22 @@
 #include <stdint.h>
 
-#include "drivers/screen.h"
-#include "drivers/port.h"
+#include "screen.h"
+#include "port.h"
+
+//void set_cursor_pos(unsigned int col, unsigned int row);
+
+
+
+void clear_screen() {
+  char *vga = (char *) 0xb8000;
+  for (unsigned i = 0; i < MAX_COLS * MAX_ROWS*2; i+=2) {
+    vga[i] = ' ';
+    vga[i+1] = 0x0f;
+
+  }
+  set_cursor_pos(0,0);
+}
+
 
 void set_cursor_pos(unsigned int col, unsigned int row) {
   uint16_t new_cursor_pos = col + (row * MAX_COLS);

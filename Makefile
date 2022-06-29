@@ -1,4 +1,4 @@
-kernel.bin: kernel_entry.o kernel.o port.o
+kernel.bin: kernel_entry.o kernel.o port.o screen.o
 	~/opt/cross/bin/i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
 
 kernel_entry.o: kernel/kernel_entry.asm

@@ -1,4 +1,6 @@
 #include "drivers/port.h"
+#include "drivers/screen.h"
+
 #include <stdint.h>
 
 void print_str(char *str) {
@@ -30,5 +32,6 @@ void print_str(char *str) {
 }
 
 void main() {
+    clear_screen();
     print_str("TEST STRING TEST STRING TEST STRING TEST STRING TEST STRING!");
 }

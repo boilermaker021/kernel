@@ -6,7 +6,12 @@
 
 #define WHITE_ON_BLACK 0x0f
 
-void clear_screen()
+#define VGA_MEM 0xb8000
+
+
+void clear_screen();
+
+void set_cursor_pos(unsigned int col, unsigned int row);
 
 
 #endif
