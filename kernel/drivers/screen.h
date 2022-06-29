@@ -13,5 +13,7 @@ void clear_screen();
 
 void set_cursor_pos(unsigned int col, unsigned int row);
 
+unsigned int get_cursor_position();
+
 
 #endif

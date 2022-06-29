@@ -34,4 +34,6 @@ void print_str(char *str) {
 void main() {
     clear_screen();
     print_str("TEST STRING TEST STRING TEST STRING TEST STRING TEST STRING!");
+    newline();
+    print_str("2");
 }
