@@ -1,6 +1,8 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <stdint.h>
+
 #define MAX_ROWS 25
 #define MAX_COLS 80
 
