@@ -36,7 +36,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 }
 
 void increment_cursor() {
-  uint16_t pos = get_cursor_position();
+  uint16_t pos = get_cursor_pos();
   port_byte_out(0x3d4, 15);
   port_byte_out(0x3d5, (uint8_t)(pos & 0xFF));
   port_byte_out(0x3d4, 14);
