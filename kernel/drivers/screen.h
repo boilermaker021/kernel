@@ -6,7 +6,22 @@
 #define MAX_ROWS 25
 #define MAX_COLS 80
 
-#define WHITE_ON_BLACK 0x0f
+#define BLACK        0x0
+#define BLUE         0x1
+#define GREEN        0x2
+#define CYAN         0x3
+#define RED          0x4
+#define PURPLE       0x5
+#define BROWN        0x6
+#define GRAY         0x7
+#define DARY_GRAY    0x8
+#define LIGHT_BLUE   0x9
+#define LIGHT_GREEN  0x9
+#define LIGHT_CYAN   0xa
+#define LIGHT_RED    0xb
+#define LIGHT_PURPLE 0xc
+#define YELLOW       0xd
+#define WHITE        0xf
 
 #define VGA_MEM_ADDR 0xb8000
 
