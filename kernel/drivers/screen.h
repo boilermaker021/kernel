@@ -39,7 +39,9 @@ void set_cursor_coord(unsigned int row, unsigned int col);
 
 unsigned int get_cursor_pos();
 
-void print_char_at(char character, int row, int col);
+void kprint_char_at(char character, int row, int col);
+
+void kprint_str(char* str);
 
 
 #endif

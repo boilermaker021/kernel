@@ -2,6 +2,7 @@
 
 #include "screen.h"
 #include "port.h"
+#include "../types.h"
 
 //void set_cursor_pos(unsigned int col, unsigned int row);
 
@@ -51,7 +52,7 @@ void increment_cursor() {
 }
 
 
-void print_char_at(char c, int row, int col) {
+void kprint_char_at(char c, int row, int col) {
   uint16_t pos = 0;
   if (row == -1 && col == -1) {
     pos = get_cursor_pos();
@@ -67,4 +68,22 @@ void print_char_at(char c, int row, int col) {
   set_cursor_pos(pos+1);
 
 
+}
+
+void kprint_str(char* str) {
+  if(str == NULL) {
+    return;
+  }
+  for (int i = 0; str[i] != '\0'; i++) {
+    if (str[i] == '\n') {
+      uint16_t pos = get_cursor_pos();
+      uint16_t row = pos / MAX_COLS;
+      set_cursor_coord(0, row+1);
+    }
+    else {
+      kprint_char_at(str[i], -1, -1);
+    }
+  }
+
+  
 }
