@@ -13,7 +13,7 @@ void clear_screen() {
     vga[i].bg = 0x0;
     vga[i].fg = 0xf;
   }
-  set_cursor_pos(0,0);
+  set_cursor_coord(0,0);
 }
 
 unsigned int get_cursor_pos() {
@@ -27,12 +27,19 @@ unsigned int get_cursor_pos() {
 }
 
 
-void set_cursor_pos(unsigned int col, unsigned int row) {
+void set_cursor_coord(unsigned int col, unsigned int row) {
   uint16_t new_cursor_pos = col + (row * MAX_COLS);
   port_byte_out(0x3d4, 15);
   port_byte_out(0x3d5, (uint8_t)(new_cursor_pos & 0xFF));
   port_byte_out(0x3d4, 14);
   port_byte_out(0x3d5, (uint8_t)((new_cursor_pos >> 8) & 0xFF));
+}
+
+void set_cursor_pos(uint16_t position) {
+  port_byte_out(0x3d4, 15);
+  port_byte_out(0x3d5, (uint8_t)(position & 0xFF));
+  port_byte_out(0x3d4, 14);
+  port_byte_out(0x3d5, (uint8_t)((position >> 8) & 0xFF));
 }
 
 void increment_cursor() {
@@ -41,4 +48,23 @@ void increment_cursor() {
   port_byte_out(0x3d5, (uint8_t)(pos & 0xFF));
   port_byte_out(0x3d4, 14);
   port_byte_out(0x3d5, (uint8_t)((pos >> 8) & 0xFF));
+}
+
+
+void print_char_at(char c, int row, int col) {
+  uint16_t pos = 0;
+  if (row == -1 && col == -1) {
+    pos = get_cursor_pos();
+  }
+  else {
+    pos = row * MAX_COLS + col;
+  }
+
+  vga_entry_t *vga = (vga_entry_t *) VGA_MEM_ADDR;
+  vga[pos].ch = c;
+  vga[pos].fg = WHITE;
+  vga[pos].bg = BLACK;
+  set_cursor_pos(pos+1);
+
+
 }

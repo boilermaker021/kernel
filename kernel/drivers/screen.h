@@ -33,9 +33,13 @@ typedef struct vga_entry {
 
 void clear_screen();
 
-void set_cursor_pos(unsigned int col, unsigned int row);
+void set_cursor_pos(uint16_t position);
+
+void set_cursor_coord(unsigned int row, unsigned int col);
 
 unsigned int get_cursor_pos();
+
+void print_char_at(char character, int row, int col);
 
 
 #endif
