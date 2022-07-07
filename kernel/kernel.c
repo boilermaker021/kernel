@@ -6,6 +6,6 @@
 
 void main() {
     clear_screen();
-    kprint_str("this is a test");
+    kprint_str("this is a test\nnewline");
 
 }

@@ -4,15 +4,13 @@
 #include "port.h"
 #include "../types.h"
 
-//void set_cursor_pos(unsigned int col, unsigned int row);
-
 
 void clear_screen() {
   vga_entry_t *vga = (vga_entry_t *) VGA_MEM_ADDR;
   for (unsigned i = 0; i < MAX_COLS * MAX_ROWS; i++) {
     vga[i].ch = ' ';
-    vga[i].bg = 0x0;
-    vga[i].fg = 0xf;
+    vga[i].bg = BLACK;
+    vga[i].fg = WHITE;
   }
   set_cursor_coord(0,0);
 }
