@@ -19,9 +19,9 @@ void clear_screen() {
 unsigned int get_cursor_pos() {
   port_byte_out(0x3d4, 14);
   unsigned int position = port_byte_in(0x3d5);
-  position = position << 8; /* high byte */
+  position = position << 8;
 
-  port_byte_out(0x3d4, 15); /* requesting low byte */
+  port_byte_out(0x3d4, 15);
   position += port_byte_in(0x3d5);
   return position;
 }
@@ -74,7 +74,7 @@ void kprint_char_at(char c, int row, int col) {
 }
 
 void scroll_row() {
-  vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;// + MAX_COLS;
+  vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;
   for(int i = 0; i < MAX_ROWS - 1; i++) {
     memcpy(base, base + MAX_COLS, MAX_COLS);
     base += MAX_COLS;

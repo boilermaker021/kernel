@@ -7,6 +7,6 @@
 
 void main() {
     clear_screen();
-    kprint_str("this is a test\nnewline\n15 as string: ");
+    kprint_str("this is a test\nnewline\n15 as string: "); //TODO: Implement itoa function
 
 }

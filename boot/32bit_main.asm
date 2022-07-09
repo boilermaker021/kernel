@@ -18,7 +18,7 @@ KERNEL_OFFSET equ 0x1000 ; The same one we used when linking the kernel
 [bits 16]
 load_kernel:
     mov bx, KERNEL_OFFSET ; Read from disk and store in 0x1000
-    mov dh, 3
+    mov dh, [SECTORS_TO_LOAD]
     mov dl, 0
     call disk_load
     ret
@@ -29,7 +29,8 @@ BEGIN_PM:
     jmp $ ; Stay here when the kernel returns control to us (if ever)
 
 
-BOOT_DRIVE db 0 ; 
+BOOT_DRIVE db 0 
+SECTORS_TO_LOAD db 3
 
 times 510 - ($-$$) db 0
 dw 0xaa55
