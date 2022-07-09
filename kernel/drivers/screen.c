@@ -3,6 +3,7 @@
 #include "screen.h"
 #include "port.h"
 #include "../types.h"
+#include "../mem.h"
 
 
 void clear_screen() {
@@ -59,12 +60,26 @@ void kprint_char_at(char c, int row, int col) {
     pos = row * MAX_COLS + col;
   }
 
+  if (pos > MAX_COLS * MAX_ROWS) {
+    scroll_row();
+  }
+
   vga_entry_t *vga = (vga_entry_t *) VGA_MEM_ADDR;
   vga[pos].ch = c;
   vga[pos].fg = WHITE;
   vga[pos].bg = BLACK;
   set_cursor_pos(pos+1);
 
+
+}
+
+void scroll_row() {
+  vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;// + MAX_COLS;
+  for(int i = 0; i < MAX_ROWS - 1; i++) {
+    memcpy(base, base + MAX_COLS, MAX_COLS);
+    base += MAX_COLS;
+  }
+  set_cursor_pos(get_cursor_pos() - MAX_COLS);
 
 }
 
@@ -82,6 +97,4 @@ void kprint_str(char* str) {
       kprint_char_at(str[i], -1, -1);
     }
   }
-
-  
 }

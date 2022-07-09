@@ -1,4 +1,4 @@
-kernel.bin: kernel_entry.o kernel.o port.o screen.o
+kernel.bin: kernel_entry.o kernel.o port.o screen.o mem.o
 	~/opt/cross/bin/i686-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
 
 kernel_entry.o: kernel/kernel_entry.asm
@@ -8,6 +8,9 @@ kernel.o: kernel/kernel.c
 	~/opt/cross/bin/i686-elf-gcc -ffreestanding -c $< -o $@
 
 port.o: kernel/drivers/port.c
+	~/opt/cross/bin/i686-elf-gcc -ffreestanding -c $^ -o $@
+
+mem.o: kernel/mem.c
 	~/opt/cross/bin/i686-elf-gcc -ffreestanding -c $^ -o $@
 
 screen.o: kernel/drivers/screen.c
