@@ -5,20 +5,17 @@
 
 #include <stdint.h>
 
-//likely error with scroll_row() - FIX
 void main() {
     clear_screen();
     char line_str[] = "Line: ";
     uint32_t counter = 0;
     while (counter < 429) {
-        kprint_str(line_str);
-        char buf[34] = { 0 };
+        kprint(line_str);
+        char buf[12] = { 0 };
         itoa(buf, counter+1);
-        kprint_str(buf);
-        kprint_str("\n");
+        kprint(buf);
+        kprint("\n");
         counter++;
     }
-
-    kprint_str("Final Line.");
-
+    kprint("Final Line.");
 }

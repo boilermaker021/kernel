@@ -41,7 +41,7 @@ unsigned int get_cursor_pos();
 
 void kprint_char_at(char character, int row, int col);
 
-void kprint_str(char* str);
+void kprint(char* str);
 
 
 #endif

@@ -79,7 +79,7 @@ void kprint_char_at(char c, int row, int col) {
   set_cursor_pos(pos+1);
 }
 
-void kprint_str(char* str) {
+void kprint(char* str) {
   if(str == NULL) {
     return;
   }

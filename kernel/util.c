@@ -5,15 +5,15 @@
 
 //unsigned for now
 void itoa(char *dest, uint32_t in) {
-  char buf[34] = { 0 };
+  char buf[12] = { 0 };
   uint8_t counter = 1;
   while (in > 0) {
     uint16_t rem = in % 10;
-    buf[33 - counter] = rem + 48;
+    buf[11 - counter] = rem + 48;
     counter++;
     in /= 10;
   }
-  buf[33] = '\0';
-  memcpy(dest, buf+(34-counter), 34);
+  buf[11] = '\0';
+  memcpy(dest, buf+(12-counter), 12);
 
 }
