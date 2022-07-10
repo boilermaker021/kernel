@@ -1,12 +1,26 @@
 #include "drivers/port.h"
 #include "drivers/screen.h"
 #include "mem.h"
+#include "util.h"
 
 #include <stdint.h>
 
-
+//likely error with scroll_row() - FIX
 void main() {
     clear_screen();
-    kprint_str("this is a test\nnewline\n15 as string: "); //TODO: Implement itoa function
+    char line_str[] = "Line: ";
+    uint32_t counter = 0;
+    while (counter < 25) {
+        kprint_str(line_str);
+        char buf[34] = { 0 };
+        itoa(buf, counter+1);
+        kprint_str(buf);
+        kprint_str("\n");
+
+        counter++;
+    }
+
+    
+    
 
 }
