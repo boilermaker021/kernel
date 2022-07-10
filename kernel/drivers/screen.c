@@ -50,6 +50,15 @@ void increment_cursor() {
   port_byte_out(0x3d5, (uint8_t)((pos >> 8) & 0xFF));
 }
 
+void scroll_row() {
+  vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;
+  for(int i = 0; i < MAX_ROWS - 1; i++) {
+    memcpy(base, base + MAX_COLS, MAX_COLS);
+    base += MAX_COLS;
+  }
+  set_cursor_coord(0, 24);
+
+}
 
 void kprint_char_at(char c, int row, int col) {
   uint16_t pos = 0;
@@ -69,18 +78,6 @@ void kprint_char_at(char c, int row, int col) {
   vga[pos].fg = WHITE;
   vga[pos].bg = BLACK;
   set_cursor_pos(pos+1);
-
-
-}
-
-void scroll_row() {
-  vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;
-  for(int i = 0; i < MAX_ROWS - 1; i++) {
-    memcpy(base, base + MAX_COLS, MAX_COLS);
-    base += MAX_COLS;
-  }
-  set_cursor_pos(get_cursor_pos() - MAX_COLS);
-
 }
 
 void kprint_str(char* str) {
