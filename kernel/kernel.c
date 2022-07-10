@@ -10,17 +10,15 @@ void main() {
     clear_screen();
     char line_str[] = "Line: ";
     uint32_t counter = 0;
-    while (counter < 26) {
+    while (counter < 429) {
         kprint_str(line_str);
         char buf[34] = { 0 };
         itoa(buf, counter+1);
         kprint_str(buf);
         kprint_str("\n");
-
         counter++;
     }
 
-    
-    
+    kprint_str("Final Line.");
 
 }
