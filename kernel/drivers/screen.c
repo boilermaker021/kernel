@@ -53,11 +53,10 @@ void increment_cursor() {
 void scroll_row() {
   vga_entry_t *base = (vga_entry_t *)VGA_MEM_ADDR;
   for(int i = 0; i < MAX_ROWS - 1; i++) {
-    memcpy(base, base + MAX_COLS, MAX_COLS);
+    memcpy(base, &base[MAX_COLS], MAX_COLS * 2);
     base += MAX_COLS;
   }
   set_cursor_coord(0, 24);
-
 }
 
 void kprint_char_at(char c, int row, int col) {
@@ -69,10 +68,10 @@ void kprint_char_at(char c, int row, int col) {
     pos = row * MAX_COLS + col;
   }
 
-  if (pos > MAX_COLS * MAX_ROWS) {
+  if (pos >= MAX_COLS * MAX_ROWS) {
     scroll_row();
   }
-
+  pos = get_cursor_pos();
   vga_entry_t *vga = (vga_entry_t *) VGA_MEM_ADDR;
   vga[pos].ch = c;
   vga[pos].fg = WHITE;
