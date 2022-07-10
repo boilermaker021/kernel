@@ -10,7 +10,7 @@ void main() {
     clear_screen();
     char line_str[] = "Line: ";
     uint32_t counter = 0;
-    while (counter < 25) {
+    while (counter < 26) {
         kprint_str(line_str);
         char buf[34] = { 0 };
         itoa(buf, counter+1);
