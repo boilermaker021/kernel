@@ -30,7 +30,7 @@ BEGIN_PM:
 
 
 BOOT_DRIVE db 0 
-SECTORS_TO_LOAD db 3
+SECTORS_TO_LOAD db 5
 
 times 510 - ($-$$) db 0
 dw 0xaa55
