@@ -17,5 +17,16 @@ void main() {
         kprint("\n");
         counter++;
     }
-    kprint("Final Line.");
+    kprint("Hex Check:\n");
+    char hex[11] = { 0 };
+    hexstr(hex, 0xbee2);
+    kprint("0xbee2: ");
+    kprint(hex);
+    kprint("\n");
+
+    kprint("0xdeadbeef: ");
+    hexstr(hex, 0xdeadbeef);
+    kprint(hex);
+    kprint("\n");
+
 }
