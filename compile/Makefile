@@ -1,9 +1,11 @@
 CC:=i686-elf-gcc
 AS:=i686-elf-as
-WARNINGS:= -Wall -Wextra
-CFLAGS := -std=gnu99 -ffreestanding -O2 $(WARNINGS) -I../include/
-OBJDIR := obj/
-
+WARNINGS:=-Wall -Wextra
+CFLAGS:=-std=gnu99 -ffreestanding -O2 $(WARNINGS) -I../include/
+OBJDIR:=obj/
+SOURCEDIR:=../src
+SOURCES:=$(shell find $(SOURCEDIR) -name '*.c') $(shell find $(SOURCEDIR) -name '*.S')
+OBJECTS:=$(SOURCES:../src/%.c=%.o) $(SOURCES:../src/%.S=%.o)
 
 iso: bin
 	mkdir -p isodir/boot/grub
@@ -14,7 +16,7 @@ iso: bin
 bin: source linker.ld
 	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJDIR)multiboot.o $(OBJDIR)kernel_entry.o $(OBJDIR)port.o $(OBJDIR)vga.o -lgcc
 
-source: kernel_entry.o multiboot.o port.o vga.o print.o
+source: $(OBJECTS)
 
 %.o : ../src/%.c
 	mkdir -p obj
