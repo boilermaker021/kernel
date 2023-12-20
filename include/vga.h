@@ -2,7 +2,9 @@
 #define VGA_H
 #include <stdint.h>
 
-#define VGA_MEM_START 0xB8000;
+#define VGA_MEM_START 0xB8000
+#define VGA_HEIGHT 25
+#define VGA_WIDTH 80
 
 enum vga_color {
   VGA_COLOR_BLACK = 0,
@@ -29,6 +31,11 @@ struct vga_entry {
   uint8_t fg: 4;
   uint8_t bg: 4;
 };
+
+void set_cursor_pos(uint8_t x, uint8_t y);
+void set_raw_cursor_pos(uint16_t pos);
+uint16_t get_raw_cursor_pos();
+
 
 
 #endif
