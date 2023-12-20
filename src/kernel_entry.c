@@ -1,19 +1,34 @@
+#include <stdbool.h>
+
 #include "vga.h"
 #include "string.h"
 #include "print.h"
+#include "multiboot.h"
 
-void kernel_main(void) {
-  for(int i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
-    termbuffer[i] = (vga_entry_t){.chr = 0x00, .bg = term_bg, .fg = term_fg};
+void kernel_main(multiboot_info_t *mbd, unsigned int magic) {
+  bool valid_memory_map = true;
+  if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
+    valid_memory_map = false;
+  }
+  if (!(mbd->flags >> 6 & 0x1)) {
+    valid_memory_map = false;
   }
 
-  char buf[512] = "This is a test string\nThis is a second test string\n";
-  kprint(buf);
+  for (unsigned int i = 0; i < 24; i++) {
+    kprint("0x");
+    char outbuf[5] = {0};
+    itohexstr(i, outbuf);
+    kprint(outbuf);
+    kprint("\n");
+  }
 
-  char hx[9] = {0};
-  itohexstr(0xDEADBEEF, hx);
-  kprint("0x");
-  kprint(hx);
+  kprint("nanananana\n");
+  kprint("n");
+  
+  
+  
+  
+
 
   
 }

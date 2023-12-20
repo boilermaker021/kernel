@@ -36,9 +36,15 @@ extern volatile vga_entry_t *termbuffer;
 extern volatile uint8_t term_fg;
 extern volatile uint8_t term_bg;
 
-void set_cursor_pos(uint8_t x, uint8_t y);
-void set_raw_cursor_pos(uint16_t pos);
-uint16_t get_raw_cursor_pos();
+void clear_screen();
+
+void set_cursor_pos(uint16_t position);
+
+void set_cursor_coord(unsigned int row, unsigned int col);
+
+unsigned int get_cursor_pos();
+
+void scroll();
 
 
 
