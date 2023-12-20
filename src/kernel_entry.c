@@ -7,8 +7,13 @@ void kernel_main(void) {
     termbuffer[i] = (vga_entry_t){.chr = 0x00, .bg = term_bg, .fg = term_fg};
   }
 
-  char buf[512] = "This is a test string\nThis is a second test string";
+  char buf[512] = "This is a test string\nThis is a second test string\n";
   kprint(buf);
-  //kprint(buf);
+
+  char hx[9] = {0};
+  itohexstr(0xDEADBEEF, hx);
+  kprint("0x");
+  kprint(hx);
+
   
 }
