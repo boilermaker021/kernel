@@ -3,6 +3,8 @@
 
 #include "vga.h"
 
+void kprint(char *str);
+void kputc(char c);
 
 
 #endif

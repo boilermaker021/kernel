@@ -4,7 +4,7 @@
 
 #define VGA_MEM_START 0xB8000
 #define VGA_HEIGHT 25
-#define VGA_WIDTH 80
+#define VGA_WIDTH 80 
 
 enum vga_color {
   VGA_COLOR_BLACK = 0,
@@ -26,11 +26,13 @@ enum vga_color {
 };
 
 
-struct vga_entry {
+typedef struct vga_entry {
   uint8_t chr;
   uint8_t fg: 4;
   uint8_t bg: 4;
-};
+} vga_entry_t;
+
+extern volatile vga_entry_t *termbuffer;
 
 void set_cursor_pos(uint8_t x, uint8_t y);
 void set_raw_cursor_pos(uint16_t pos);

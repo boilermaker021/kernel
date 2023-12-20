@@ -26,8 +26,7 @@ _start:
   perform critical startup actions here, like GDT, paging
   */
 
-  call kernel_main
-
+   call kernel_main
    cli
 1: hlt
    jmp 1
