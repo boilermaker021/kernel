@@ -35,12 +35,12 @@ void stohexstr(unsigned int hex, char *outbuf) {
 void ctohexstr(unsigned char hex, char *outbuf) {
     unsigned char upper_half = hex >> 4;
     unsigned char lower_half = hex & 0x0F;
-    if (upper_half < 9) {
+    if (upper_half <= 9) {
         outbuf[0] = upper_half + '0';
     } else {
         outbuf[0] = upper_half + 'A' - 0x0a;
     }
-    if (lower_half < 9) {
+    if (lower_half <= 9) {
         outbuf[1] = lower_half + '0';
     } else {
         outbuf[1] = lower_half + 'A' - 0x0a;
