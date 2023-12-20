@@ -2,6 +2,14 @@
 #include "print.h"
 
 void kprint(char *str) {
+    uint32_t size = 0;
+    uint16_t pos = get_raw_cursor_pos();
+    for (int i = 0; str[i] != '\0'; i++) {
+        termbuffer[i+pos] = (vga_entry_t){.chr=str[i], .bg = VGA_COLOR_BLACK, .fg = VGA_COLOR_WHITE};
+        size++;
+    }
+    set_raw_cursor_pos(pos+size);
+    
     return;
 }
 
