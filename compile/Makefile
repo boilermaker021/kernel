@@ -1,7 +1,9 @@
-CC=i686-elf-gcc
-AS=i686-elf-as
+CC:=i686-elf-gcc
+AS:=i686-elf-as
 WARNINGS:= -Wall -Wextra
-CFLAGS := -std=gnu99 -ffreestanding -O2 $(WARNINGS)
+CFLAGS := -std=gnu99 -ffreestanding -O2 $(WARNINGS) -I../include/
+OBJDIR := obj/
+
 
 iso: bin
 	mkdir -p isodir/boot/grub
@@ -10,27 +12,24 @@ iso: bin
 	grub-mkrescue -o kernel.iso isodir
 
 bin: source linker.ld
-	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib multiboot.o kernel_entry.o port.o vga.o -lgcc
+	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJDIR)multiboot.o $(OBJDIR)kernel_entry.o $(OBJDIR)port.o $(OBJDIR)vga.o -lgcc
 
-source: kernel_entry.o multiboot.o port.o vga.o
+source: kernel_entry.o multiboot.o port.o vga.o print.o
 
-vga.o: ../vga.c
-	$(CC) -c ../vga.c -o vga.o $(CFLAGS)
+%.o : ../src/%.c
+	mkdir -p obj
+	$(CC) -c $(CFLAGS) $< -o obj/$@
 
-port.o: ../port.c
-	$(CC) -c ../port.c -o port.o $(CFLAGS)
-
-kernel_entry.o: ../kernel_entry.c
-	$(CC) -c ../kernel_entry.c -o kernel_entry.o $(CFLAGS)
-
-multiboot.o: ../multiboot.S
-	$(AS) ../multiboot.S -o multiboot.o
+%.o : ../src/%.S
+	mkdir -p obj
+	$(AS) $< -o obj/$@
 
 clean:
 		rm -f *.o
 		rm -f *.bin
 		rm -f *.iso
 		rm -rf isodir
+		rm -rf obj
 
 qemu: iso
 	qemu-system-i386 kernel.iso
