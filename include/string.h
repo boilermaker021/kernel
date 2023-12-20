@@ -4,8 +4,8 @@
 #include <stdint.h>
 
 uint32_t strlen(char *str);
-void uitoa(unsigned int integer, char *outbuf);
-void itoa(int integer, char *outbuf);
+int utoa(unsigned int integer, char *outbuf, unsigned int len);
+int itoa(int integer, char *outbuf, unsigned int len);
 void itohexstr(unsigned int hex, char *outbuf);
 void ctohexstr(unsigned char hex, char *outbuf);
 

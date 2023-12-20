@@ -10,11 +10,11 @@ uint32_t strlen(char *str) {
     return size;
 }
 
-void uitoa(unsigned int integer, char *outbuf) {
+int utoa(unsigned int integer, char *outbuf, unsigned int len) {
     
 }
 
-void itoa(int integer, char *outbuf) {
+int itoa(int integer, char *outbuf, unsigned int len) {
 
 }
 
@@ -31,6 +31,7 @@ void stohexstr(unsigned int hex, char *outbuf) {
         ctohexstr(buf[1-i], outbuf + i*2);
     }
 }
+
 
 void ctohexstr(unsigned char hex, char *outbuf) {
     unsigned char upper_half = hex >> 4;
