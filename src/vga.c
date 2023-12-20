@@ -3,6 +3,8 @@
 
 
 volatile vga_entry_t *termbuffer = (vga_entry_t *)VGA_MEM_START;
+volatile uint8_t term_fg = VGA_COLOR_WHITE;
+volatile uint8_t term_bg = VGA_COLOR_BLACK;
 
 void set_cursor_pos(uint8_t x, uint8_t y) {
     uint16_t pos = (y * VGA_WIDTH) + x;

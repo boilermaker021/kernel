@@ -33,6 +33,8 @@ typedef struct vga_entry {
 } vga_entry_t;
 
 extern volatile vga_entry_t *termbuffer;
+extern volatile uint8_t term_fg;
+extern volatile uint8_t term_bg;
 
 void set_cursor_pos(uint8_t x, uint8_t y);
 void set_raw_cursor_pos(uint16_t pos);

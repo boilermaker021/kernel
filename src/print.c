@@ -2,13 +2,16 @@
 #include "print.h"
 
 void kprint(char *str) {
-    uint32_t size = 0;
     uint16_t pos = get_raw_cursor_pos();
     for (int i = 0; str[i] != '\0'; i++) {
-        termbuffer[i+pos] = (vga_entry_t){.chr=str[i], .bg = VGA_COLOR_BLACK, .fg = VGA_COLOR_WHITE};
-        size++;
+        if (str[i] == '\n') {
+            pos = ((pos / VGA_WIDTH) + 1) * VGA_WIDTH;
+        } else {
+            termbuffer[pos] = (vga_entry_t){.chr=str[i], .bg = term_bg, .fg = term_fg};
+            pos++;
+        }
     }
-    set_raw_cursor_pos(pos+size);
+    set_raw_cursor_pos(pos);
     
     return;
 }
@@ -16,7 +19,7 @@ void kprint(char *str) {
 void kputc(char c) {
     uint16_t pos = get_raw_cursor_pos();
     termbuffer[pos].chr = c;
-    termbuffer[pos].fg = VGA_COLOR_WHITE;
-    termbuffer[pos].bg = VGA_COLOR_BLACK;
+    termbuffer[pos].fg = term_fg;
+    termbuffer[pos].bg = term_fg;
     set_raw_cursor_pos(pos+1);
 }
