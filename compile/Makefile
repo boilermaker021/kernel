@@ -6,26 +6,25 @@ OBJDIR:=obj
 SOURCEDIR:=../src
 CSOURCES:=$(shell find $(SOURCEDIR) -name '*.c') 
 ASSOURCES:=$(shell find $(SOURCEDIR) -name '*.S')
-OBJECTS:=$(CSOURCES:../src/%.c=%.o) $(ASSOURCES:../src/%.S=%.o)
+OBJECTS:=$(CSOURCES:../src/%.c=$(OBJDIR)/%.o) $(ASSOURCES:../src/%.S=$(OBJDIR)/%.o)
 
-iso: bin
+kernel.iso: kernel.bin
 	mkdir -p isodir/boot/grub
 	cp kernel.bin isodir/boot/kernel.bin
 	cp grub.cfg isodir/boot/grub/grub.cfg
 	grub-mkrescue -o kernel.iso isodir
 
-bin: source linker.ld
-	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJECTS:%=$(OBJDIR)/%) -lgcc
+kernel.bin: $(OBJECTS) linker.ld
+	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJECTS) -lgcc
 
-source: $(OBJECTS)
 
-%.o : ../src/%.c
+$(OBJDIR)/%.o : ../src/%.c
 	mkdir -p obj
-	$(CC) -c $(CFLAGS) $< -o obj/$@
+	$(CC) -c $(CFLAGS) $< -o $@
 
-%.o : ../src/%.S
+$(OBJDIR)/%.o : ../src/%.S
 	mkdir -p obj
-	$(AS) $< -o obj/$@
+	$(AS) $< -o $@
 
 clean:
 		rm -f *.o
@@ -34,5 +33,5 @@ clean:
 		rm -rf isodir
 		rm -rf obj
 
-qemu: iso
+qemu: kernel.iso
 	qemu-system-i386 kernel.iso
