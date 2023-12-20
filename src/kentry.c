@@ -5,7 +5,7 @@
 #include "print.h"
 #include "multiboot.h"
 
-void kernel_main(multiboot_info_t *mbd, unsigned int magic) {
+void kentry(multiboot_info_t *mbd, unsigned int magic) {
   bool valid_memory_map = true;
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
     valid_memory_map = false;

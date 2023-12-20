@@ -45,7 +45,7 @@ _start:
    push %eax #push multiboot info
    push %ebx #push magic #
 
-   call kernel_main
+   call kentry
    cli
 1: hlt
    jmp 1
