@@ -34,4 +34,4 @@ clean:
 		rm -rf obj
 
 qemu: kernel.iso
-	qemu-system-i386 kernel.iso
+	qemu-system-i386 -m 4G kernel.iso
