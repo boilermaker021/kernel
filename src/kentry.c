@@ -5,28 +5,54 @@
 #include "print.h"
 #include "multiboot.h"
 
-void kentry(multiboot_info_t *mbd, unsigned int magic) {
+extern uint32_t _start;
+
+void kentry(multiboot_info_t *mbt, unsigned int magic) {
+  
+  kprints("Kernel Memory Location: ");
+  kprinth(_start, sizeof(uint32_t));
+  kprints("\n");
+  
   bool valid_memory_map = true;
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
     valid_memory_map = false;
   }
-  if (!(mbd->flags >> 6 & 0x1)) {
+  if (!(mbt->flags >> 6 & 0x1)) {
     valid_memory_map = false;
   }
 
-  for (unsigned int i = 0; i < 24; i++) {
-    kprints("0x");
-    kprinth(i, sizeof(int));
-    kprints("\n");
+  if (valid_memory_map) {
+    kprints("Valid memory map found!\n");
+    multiboot_memory_map_t *mmap = (multiboot_memory_map_t *)mbt->mmap_addr;
+    while (mmap < mbt->mmap_addr + mbt->mmap_length) {
+      kprints("Entry: ");
+      kprinth((uint32_t)mmap->addr, sizeof(uint32_t));
+      kprints("\n");
+      kprints("Type: ");
+      switch(mmap->type) {
+        case MULTIBOOT_MEMORY_AVAILABLE:
+          kprints("Available\n");
+          break;
+        case MULTIBOOT_MEMORY_RESERVED:
+          kprints("Reserved\n");
+          break;
+        case MULTIBOOT_MEMORY_ACPI_RECLAIMABLE:
+          kprints("ACPI Reclaimable\n");
+          break;
+        case MULTIBOOT_MEMORY_NVS:
+          kprints("NVS\n");
+          break;
+        case MULTIBOOT_MEMORY_BADRAM:
+          kprints("Bad Ram\n");
+          break;
+      }
+      kprints("Length: ");
+      kprinth(mmap->len, sizeof(uint32_t));
+      kprints("\n");
+      mmap = (multiboot_memory_map_t *)((uint32_t) mmap + mmap->size + sizeof(mmap->size));
+    }
+  } else {
+    kprints("-------BAD MEMORY MAP!-----");
   }
-
-  kprints("nanananana\n");
-  kprints("n");
-  
-  
-  
-  
-
-
   
 }
