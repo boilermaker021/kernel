@@ -15,15 +15,13 @@ void kentry(multiboot_info_t *mbd, unsigned int magic) {
   }
 
   for (unsigned int i = 0; i < 24; i++) {
-    kprint("0x");
-    char outbuf[5] = {0};
-    itohexstr(i, outbuf);
-    kprint(outbuf);
-    kprint("\n");
+    kprints("0x");
+    kprinth(i, sizeof(int));
+    kprints("\n");
   }
 
-  kprint("nanananana\n");
-  kprint("n");
+  kprints("nanananana\n");
+  kprints("n");
   
   
   

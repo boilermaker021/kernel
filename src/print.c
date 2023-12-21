@@ -1,7 +1,8 @@
 #include "vga.h"
 #include "print.h"
+#include "string.h"
 
-void kprint(char *str) {
+void kprints(char *str) {
     uint16_t pos = get_cursor_pos();
     for (int i = 0; str[i] != '\0'; i++) {
         if (pos > VGA_WIDTH * VGA_HEIGHT - 1) {
@@ -22,6 +23,22 @@ void kprint(char *str) {
     set_cursor_pos(pos);
     
     return;
+}
+
+void kprinth(uint32_t hex, uint8_t size) {
+    char outbuf[5] = {0};
+    switch(size) {
+        case sizeof(char):
+            ctohexstr(hex, outbuf);
+            break;
+        case sizeof(short):
+            stohexstr(hex, outbuf);
+            break;
+        case sizeof(int):
+            itohexstr(hex, outbuf);
+            break;
+    }
+    kprints(outbuf);
 }
 
 void kputc(char c) {
