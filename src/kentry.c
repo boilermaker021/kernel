@@ -5,13 +5,17 @@
 #include "print.h"
 #include "multiboot.h"
 
-extern uint32_t _start;
+extern void *_start;
+extern void *endKernel;
 
 void kentry(multiboot_info_t *mbt, unsigned int magic) {
   
-  kprints("Kernel Memory Location: ");
-  kprinth(_start, sizeof(uint32_t));
+  kprints("Kernel Memory Location:\nStart:");
+  kprinth(&_start, sizeof(void *));
+  kprints("\nEnd: ");
+  kprinth(&endKernel, sizeof(void *));
   kprints("\n");
+
   
   bool valid_memory_map = true;
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
