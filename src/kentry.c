@@ -5,12 +5,18 @@
 #include "print.h"
 #include "multiboot.h"
 #include "kmem.h"
+#include "gdt.h"
+#include "idt.h"
 
 extern void *_start;
 extern void *endKernel;
 
 void kentry(multiboot_info_t *mbt, unsigned int magic) {
-  
+    uint32_t mask = disable();
+    init_gdt();
+    init_idt();
+    restore(mask);
+
     kprints("Kernel Memory Location:\nStart:");
     kprinth(&_start, sizeof(void *));
     kprints("\nEnd: ");
@@ -42,4 +48,5 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
         kprints("Bad memory map, panicing...\n");
         return;
     }
+
 }
