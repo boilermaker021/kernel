@@ -13,3 +13,11 @@ To autolaunch qemu after building the iso, run `make qemu`
 # Feature List
 So far, the kernel has the following features implemented:
 * Printing to VGA memory
+* Reading a Multiboot memory map
+* Set up required GDT descriptors:
+    * Kernel Code
+    * Kernel Data
+    * User Code
+    * User Data
+    * Null Segment
+* Setup IDT structure (no handlers installed yet)
