@@ -1,4 +1,4 @@
-#include "interrupts.h"
+#include "intutils.h"
 
 uint32_t disable() {
     uint32_t eflags;
