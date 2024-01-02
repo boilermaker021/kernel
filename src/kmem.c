@@ -47,7 +47,7 @@ void initialize_memory_map(char *kstart, char *kend, multiboot_info_t *mbt) {
             uint32_t block_size = mmap->len;
             if(block_start < kernel_end) {
                 block_start = kernel_end + 0x0F;
-                block_size -= ((kernel_end+0x0F) - block_start);
+                block_size -= ((kernel_end + 0x0F) - block_start);
 
             }
             if (block_size > heap_size) { //only uses the largest contiguous chunk of memory, not ideal
