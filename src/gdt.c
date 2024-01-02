@@ -63,8 +63,6 @@ void init_gdt() {
         .flags = BITS_32 | PAGE_GRANULARITY
     };
     
-    asm volatile("call register_segment_setup\n\t"
-                : : "a"(&gdt_ptr)); //load gdt ptr into gdtr register (passed in on EAX)
-    //seg_reg_setup();
+    gdt_setup(&gdt_ptr);
     return;
 }

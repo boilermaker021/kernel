@@ -1,7 +1,8 @@
 
 .section .text
-.globl register_segment_setup
-register_segment_setup:
+.globl gdt_setup
+gdt_setup:
+        mov 4(%esp), %eax
         lgdt (%eax)
         jmp $0x08, $farjmp
 farjmp:
