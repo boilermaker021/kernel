@@ -40,7 +40,7 @@ struct gdt_ptr {
 
 typedef struct gdt_ptr gdt_ptr_t;
 
-extern void seg_reg_setup();
+extern void register_segment_setup();
 extern gdt_ptr_t gdt_ptr;
 extern gdt_entry_t gdt_entries[5];
 
