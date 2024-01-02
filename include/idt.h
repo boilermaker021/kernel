@@ -30,6 +30,12 @@ struct idt_ptr {
 
 typedef struct idt_ptr idt_ptr_t;
 
+extern idt_ptr_t idt_ptr;
+extern idt_entry_t interrupt_array[256];
+
+
+void idt_setup();
+void int_handler(uint16_t int_num);
 
 
 
