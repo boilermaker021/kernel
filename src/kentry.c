@@ -23,6 +23,13 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
     kprinth(&endKernel, sizeof(void *));
     kprints("\n");
 
+    kprints("GDT table at address: ");
+    kprinth(&gdt_entries, sizeof(uint32_t));
+    kprints("\nIDT table at address: ");
+    kprinth(&interrupt_array, sizeof(uint32_t));
+    kprints("\nBase Handler: ");
+    kprinth(int_handler, sizeof(uint32_t));
+
   
     bool valid_memory_map = true;
     if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
@@ -49,4 +56,6 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
         return;
     }
 
+    asm("int $0x0");
+    kprints("Interrupt done!\n");
 }
