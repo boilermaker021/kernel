@@ -20,4 +20,5 @@ So far, the kernel has the following features implemented:
     * User Code
     * User Data
     * Null Segment
-* Setup IDT structure (no handlers installed yet)
+* Setup IDT structure
+    * Installed one basic handler for all interrupts
