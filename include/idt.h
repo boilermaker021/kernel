@@ -35,8 +35,42 @@ extern idt_entry_t interrupt_array[256];
 
 
 void idt_setup();
-void int_handler(uint16_t int_num);
+void int_handler(uint32_t int_num, uint32_t error_code);
 
+
+extern void INT_NOERR0();
+extern void INT_NOERR1();
+extern void INT_NOERR2();
+extern void INT_NOERR3();
+extern void INT_NOERR4();
+extern void INT_NOERR5();
+extern void INT_NOERR6();
+extern void INT_NOERR7();
+extern void INT_ERR8();
+extern void INT_NOERR9();
+extern void INT_ERR10();
+extern void INT_ERR11();
+extern void INT_ERR12();
+extern void INT_ERR13();
+extern void INT_ERR14();
+extern void INT_NOERR15();
+extern void INT_NOERR16();
+extern void INT_NOERR17();
+extern void INT_NOERR18();
+extern void INT_NOERR19();
+extern void INT_NOERR20();
+extern void INT_NOERR21();
+extern void INT_NOERR22();
+extern void INT_NOERR23();
+extern void INT_NOERR24();
+extern void INT_NOERR25();
+extern void INT_NOERR26();
+extern void INT_NOERR27();
+extern void INT_NOERR28();
+extern void INT_NOERR29();
+extern void INT_NOERR30();
+extern void INT_NOERR31();
+extern void INT_NOERR32();
 
 
 #endif
