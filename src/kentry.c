@@ -56,6 +56,6 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
         return;
     }
 
-    asm("int $0x0");
+    asm("int $0x1a");
     kprints("Interrupt done!\n");
 }
