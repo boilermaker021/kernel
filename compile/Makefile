@@ -15,7 +15,7 @@ kernel.iso: kernel.bin
 	grub-mkrescue -o kernel.iso isodir
 
 kernel.bin: $(OBJECTS) linker.ld
-	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJECTS) -lgcc
+	$(CC) -T linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib $(OBJECTS) -lgcc -Xlinker -Map=kernel.map
 
 
 $(OBJDIR)/%.o : ../src/%.c
@@ -32,6 +32,7 @@ clean:
 		rm -f *.iso
 		rm -rf isodir
 		rm -rf obj
+		rm -f kernel.map
 
 qemu: kernel.iso
 	qemu-system-i386 -m 4G kernel.iso

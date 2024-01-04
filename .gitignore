@@ -4,3 +4,4 @@
 compile/isodir
 compile/obj
 .vscode/*
+compile/*.map
