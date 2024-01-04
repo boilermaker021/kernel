@@ -35,4 +35,4 @@ clean:
 		rm -f kernel.map
 
 qemu: kernel.iso
-	qemu-system-i386 -m 4G kernel.iso
+	qemu-system-i386 -m 4G -boot d -cdrom kernel.iso
