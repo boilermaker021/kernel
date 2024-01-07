@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include "string.h"
 
 uint32_t strlen(char *str) {
@@ -10,12 +11,26 @@ uint32_t strlen(char *str) {
     return size;
 }
 
-int utoa(unsigned int integer, char *outbuf, unsigned int len) {
-    
+char bytetochar(uint8_t byte, uint8_t c) {
+    if (byte <=9) {
+        return '0' + byte;
+    } else {
+        return (c ? 'A' : 'a') + byte - 10;
+    }
 }
 
-int itoa(int integer, char *outbuf, unsigned int len) {
+char *utoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base) {
+    int i = 0;
+    while (integer > 0) {
+        outbuf[(len - 1) - i] = bytetochar(integer % base, UPPER_CASE); //replace
+        i++;
+        integer /= base;
+    }
+    return outbuf + len - i;
+}
 
+int itoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base) {
+    bool negative = integer < 0;
 }
 
 void itohexstr(unsigned int hex, char *outbuf) {

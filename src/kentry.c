@@ -27,8 +27,6 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
     kprinth(&gdt_entries, sizeof(uint32_t));
     kprints("\nIDT table at address: ");
     kprinth(&interrupt_array, sizeof(uint32_t));
-    kprints("\nBase Handler: ");
-    kprinth(int_handler, sizeof(uint32_t));
 
   
     bool valid_memory_map = true;
@@ -41,7 +39,7 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
 
     if (valid_memory_map) {
         term_fg = VGA_COLOR_RED;
-        kprints("Valid memory map found!\n");
+        kprints("\nValid memory map found!\n");
         term_fg = VGA_COLOR_WHITE;
         initialize_memory_map(&_start, &endKernel, mbt);
         kprints("Heap Start: ");
@@ -58,4 +56,8 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
 
     asm("int $0x1a");
     kprints("Interrupt done!\n");
+    kprints("unsigned int test: 125 = ");
+    char outbuf[100] = {0};
+    char *out = utoa(125, outbuf, 100, 16);
+    kprints(out);
 }
