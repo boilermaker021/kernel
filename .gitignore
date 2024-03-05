@@ -5,3 +5,5 @@ compile/isodir
 compile/obj
 .vscode/*
 compile/*.map
+.cache/
+compile_commands.json
