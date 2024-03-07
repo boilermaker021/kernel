@@ -59,7 +59,8 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
   kprints("\nHeap start:\n");
   kprinth(heap_start, sizeof(heap_start));
   kprints("\nHeap Size:\n");
-  out = utoa(heap_size, outbuf, 100, 10);
+  char outbuf[256] = {0};
+  char *out = utoa(heap_size, outbuf, 100, 10);
   kprints(out);
   kprints(" Bytes\n");
 }
