@@ -13,7 +13,7 @@ void *memcpy(void *dest, void *src, size_t n) {
 }
 
 uint32_t strlen(char *str) {
-  uint32_t size;
+  uint32_t size = 0;
   while (*str != '\0') {
     str++;
     size++;
