@@ -21,11 +21,11 @@ size_t strlen(char *str) {
   return size;
 }
 
-char bytetochar(uint8_t byte, uint8_t c) {
+char bytetochar(uint8_t byte, bool cap) {
   if (byte <= 9) {
     return '0' + byte;
   } else {
-    return (c ? 'A' : 'a') + byte - 10;
+    return (cap ? 'A' : 'a') + byte - 10;
   }
 }
 
