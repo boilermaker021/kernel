@@ -4,6 +4,8 @@ WARNINGS:=-Wall -Wextra
 CFLAGS:=-std=gnu99 -ffreestanding -O2 $(WARNINGS) -I../include/
 OBJDIR:=obj
 SOURCEDIR:=../src
+SUBDIRS:=$(shell find $(SOURCEDIR) -type d)
+BUILDDIRS:=$(SUBDIRS:$(SOURCEDIR)%=$(OBJDIR)%)
 CSOURCES:=$(shell find $(SOURCEDIR) -name '*.c') 
 ASSOURCES:=$(shell find $(SOURCEDIR) -name '*.S')
 OBJECTS:=$(CSOURCES:../src/%.c=$(OBJDIR)/%.o) $(ASSOURCES:../src/%.S=$(OBJDIR)/%.o)
@@ -19,11 +21,11 @@ kernel.bin: $(OBJECTS) linker.ld
 
 
 $(OBJDIR)/%.o : ../src/%.c
-	mkdir -p obj
+	mkdir -p $(BUILDDIRS)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(OBJDIR)/%.o : ../src/%.S
-	mkdir -p obj
+	mkdir -p $(BUILDDIRS)
 	$(AS) $< -o $@
 
 clean:
