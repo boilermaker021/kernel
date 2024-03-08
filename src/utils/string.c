@@ -12,8 +12,8 @@ void *memcpy(void *dest, void *src, size_t n) {
   return dest;
 }
 
-uint32_t strlen(char *str) {
-  uint32_t size = 0;
+size_t strlen(char *str) {
+  size_t size = 0;
   while (*str != '\0') {
     str++;
     size++;
