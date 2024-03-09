@@ -9,6 +9,8 @@
 #include <stdint.h>
 
 void *memcpy(void *dest, void *src, size_t n);
+char *strcpy(char *dest, char *src);
+char *strncpy(char *dest, char *src, size_t n);
 uint32_t strlen(char *str);
 char bytetochar(uint8_t byte, bool cap);
 char *utoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base);

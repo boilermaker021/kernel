@@ -12,6 +12,24 @@ void *memcpy(void *dest, void *src, size_t n) {
   return dest;
 }
 
+char *strcpy(char *dest, char *src) {
+  char *d = dest;
+  while (*src != '\0') {
+    *dest = *src;
+    dest++;
+    src++;
+  }
+  return d;
+}
+
+char *strncpy(char *dest, char *src, size_t n) {
+  for (size_t i = 0; (i < n) && (src[i] != '\0'); i++) {
+    dest[i] = src[i];
+  }
+
+  return dest;
+}
+
 size_t strlen(char *str) {
   size_t size = 0;
   while (*str != '\0') {
@@ -39,6 +57,7 @@ char *utoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base) {
   return outbuf + len - i;
 }
 
+/* TODO: NOT IMPLEMENTED */
 int itoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base) {
   bool negative = integer < 0;
 }
