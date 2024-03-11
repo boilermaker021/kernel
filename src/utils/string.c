@@ -56,7 +56,7 @@ char *utoa(uint32_t integer, char *outbuf, uint8_t len, uint8_t base) {
     i++;
     integer /= base;
   }
-  return outbuf + len - i;
+  return outbuf + (len - 1) - i;
 }
 
 /* TODO: NOT IMPLEMENTED */
