@@ -8,7 +8,9 @@ To build the full ISO, run `make`
 
 To build just the binary file, run `make kernel.bin`
 
-To autolaunch qemu after building the iso, run `make qemu`
+To autolaunch the kernel in an emulator after build:
+* With QEMU: `make qemu`
+* With bochs: `make bochs`
 
 # Feature List
 So far, the kernel has the following features implemented:
