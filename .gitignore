@@ -7,3 +7,5 @@ compile/obj
 compile/*.map
 .cache/
 compile_commands.json
+compile/bochslog.txt
+compile/bx_enh_dbg.ini
