@@ -1,4 +1,5 @@
 #include "idt.h"
+#include "irq.h"
 #include "gdt.h"
 
 extern void interrupt();
@@ -56,10 +57,35 @@ void init_idt() {
   setup_idt_entry(29, INT_NOERR29, K_CODE_OFFSET, TRAP_32 | PRESENT | RING_0);
   setup_idt_entry(30, INT_NOERR30, K_CODE_OFFSET, TRAP_32 | PRESENT | RING_0);
   setup_idt_entry(31, INT_NOERR31, K_CODE_OFFSET, TRAP_32 | PRESENT | RING_0);
-  setup_idt_entry(32, INT_NOERR32, K_CODE_OFFSET, TRAP_32 | PRESENT | RING_0);
+
+  //below should be IRQS - change!
+  setup_idt_entry(32, irq0, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(33, irq1, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(34, irq2, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(35, irq3, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(36, irq4, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(37, irq5, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(38, irq6, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(39, irq7, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(40, irq8, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(41, irq9, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(42, irq10, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(43, irq11, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(44, irq12, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(45, irq13, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(46, irq14, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(47, irq15, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
 
   // lidt
   idt_setup(&idt_ptr);
+}
+
+void panic() {
+  kprints("PANIC!\n");
+  //print registers here
+  while (1) {
+    asm("hlt");
+  }
 }
 
 void int_handler(uint32_t int_num, uint32_t error_code) {
