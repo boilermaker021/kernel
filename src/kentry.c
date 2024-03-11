@@ -8,6 +8,9 @@
 #include "print.h"
 #include "string.h"
 #include "vga.h"
+#include "pit.h"
+#include "pic.h"
+#include "port.h"
 
 extern void *_start;
 extern void *endKernel;
@@ -16,8 +19,9 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
   uint32_t mask = disable();
   init_gdt();
   init_idt();
-  restore(mask);
+  restore(mask); 
 
+  asm("sti"); //initial enabling of interrupts
   kprints("Kernel Memory Location:\nStart:");
   kprinth(&_start, sizeof(void *));
   kprints("\nEnd: ");
@@ -64,5 +68,14 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
   kprints(out);
   kprints(" Bytes\n");
 
-  kprints("Test: ");
+  pic_remap(32, 39);
+  irq_clear_mask(0); //make sure timer is enabled
+  //irq_clear_mask(1); //make sure keyboard is enabled
+  init_pit(5); //setup PIT to fire every 5 ms
+
+
+  while(1) { //do nothing but keep interrupts enabled
+    //asm("sti");
+    asm("hlt");
+  }
 }
