@@ -21,4 +21,10 @@ So far, the kernel has the following features implemented:
     * User Data
     * Null Segment
 * Setup IDT structure
-    * Installed the first 32 handlers in the IDT table
+    * Handlers for reserved interrupts
+    * Handlers for 16 IRQs
+* Configure PIC
+    * Ability to set/clear IRQs
+    * Remapped IRQs to IDT entries 32-47
+* Configure PIT
+    * Interval can be set in terms of milliseconds 
