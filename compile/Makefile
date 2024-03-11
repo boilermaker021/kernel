@@ -35,6 +35,12 @@ clean:
 		rm -rf isodir
 		rm -rf obj
 		rm -f kernel.map
+		rm bochslog*
+		rm bx_enh_dbg.ini
 
 qemu: kernel.iso
 	qemu-system-i386 -m 4G -boot d -cdrom kernel.iso
+
+bochs: kernel.iso
+	mkdir -p bochs
+	bochs -f bochscfg.txt -q
