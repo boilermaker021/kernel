@@ -27,8 +27,8 @@ void kprints(char *str) {
 }
 
 void kprinth(uint32_t hex, uint8_t size) {
-  char outbuf[] = "00000000\0";
-  char *out = utoa(hex, outbuf, 9, 16);
+  char outbuf[] = "0x00000000\0";
+  char *out = utoa(hex, outbuf, sizeof(outbuf) - 1, 16);
   kprints(outbuf);
 }
 
