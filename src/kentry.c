@@ -1,7 +1,9 @@
 #include <stdbool.h>
 
+#include "clock.h"
 #include "gdt.h"
 #include "idt.h"
+#include "irq.h"
 #include "intutils.h"
 #include "kmem.h"
 #include "multiboot.h"
@@ -16,9 +18,9 @@ extern void *_start;
 extern void *endKernel;
 
 void kentry(multiboot_info_t *mbt, unsigned int magic) {
-  uint32_t mask = disable();
+  uint32_t mask = disable(); //make SURE interrupts are disabled even though they should already be
   init_gdt();
-  init_idt();
+  init_idt(); //default IDT, to be overwritten later
   restore(mask); 
 
   asm("sti"); //initial enabling of interrupts
@@ -67,15 +69,15 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
   char *out = utoa(heap_size, outbuf, 100, 10);
   kprints(out);
   kprints(" Bytes\n");
-
   pic_remap(32, 39);
   irq_clear_mask(0); //make sure timer is enabled
+  setup_irq_handler(0, clock_handler);
   //irq_clear_mask(1); //make sure keyboard is enabled
-  init_pit(5); //setup PIT to fire every 5 ms
+  init_pit(CLOCK_INTERVAL_MS); //setup PIT to fire every CLOCK_INTERVAL_MS seconds
+
 
 
   while(1) { //do nothing but keep interrupts enabled
-    //asm("sti");
     asm("hlt");
   }
 }

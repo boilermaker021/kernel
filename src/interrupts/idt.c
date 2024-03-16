@@ -59,22 +59,22 @@ void init_idt() {
   setup_idt_entry(31, INT_NOERR31, K_CODE_OFFSET, TRAP_32 | PRESENT | RING_0);
 
   //below should be IRQS - change!
-  setup_idt_entry(32, irq0, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(33, irq1, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(34, irq2, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(35, irq3, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(36, irq4, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(37, irq5, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(38, irq6, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(39, irq7, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(40, irq8, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(41, irq9, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(42, irq10, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(43, irq11, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(44, irq12, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(45, irq13, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(46, irq14, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
-  setup_idt_entry(47, irq15, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(0), irq0, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(1), irq1, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(2), irq2, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(3), irq3, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(4), irq4, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(5), irq5, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(6), irq6, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(7), irq7, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(8), irq8, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(9), irq9, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(10), irq10, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(11), irq11, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(12), irq12, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(13), irq13, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(14), irq14, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
+  setup_idt_entry(IRQ(15), irq15, K_CODE_OFFSET, INTERRUPT_32 | PRESENT | RING_0);
 
   // lidt
   idt_setup(&idt_ptr);

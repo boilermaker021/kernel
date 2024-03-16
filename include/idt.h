@@ -32,6 +32,8 @@ extern idt_entry_t interrupt_array[256];
 void init_idt();
 void idt_setup();
 void int_handler(uint32_t int_num, uint32_t error_code);
+void setup_idt_entry(uint32_t num, void *addr, uint16_t selector,
+                     uint8_t flags);
 void panic();
 
 extern void INT_NOERR0();
