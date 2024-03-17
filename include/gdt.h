@@ -35,7 +35,7 @@ typedef struct gdt_entry gdt_entry_t;
 
 struct gdt_ptr {
     uint16_t limit;
-    uint32_t base;
+    gdt_entry_t *base;
 } __attribute__((packed));
 
 typedef struct gdt_ptr gdt_ptr_t;

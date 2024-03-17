@@ -5,7 +5,7 @@ gdt_ptr_t gdt_ptr;
 gdt_entry_t gdt_entries[5] = { 0 }; // Null Segment, Kernel Code, Kernel Data, User Data, User Code
 
 void init_gdt() {
-    gdt_ptr.base = &gdt_entries;
+    gdt_ptr.base = gdt_entries;
     gdt_ptr.limit = sizeof(gdt_entries) - 1;
 
     //setup NULL segment

@@ -1,5 +1,6 @@
 #include "idt.h"
 #include "irq.h"
+#include "print.h"
 #include "gdt.h"
 
 extern void interrupt();
@@ -18,7 +19,7 @@ void setup_idt_entry(uint32_t num, void *addr, uint16_t selector,
 
 void init_idt() {
   idt_ptr.size = sizeof(interrupt_array) - 1;
-  idt_ptr.base = &interrupt_array;
+  idt_ptr.base = interrupt_array;
 
   // setup array here
   // placeholder:
