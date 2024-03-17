@@ -13,6 +13,7 @@
 #include "pit.h"
 #include "pic.h"
 #include "port.h"
+#include "keyboard.h"
 
 extern void *_start;
 extern void *endKernel;
@@ -72,7 +73,8 @@ void kentry(multiboot_info_t *mbt, unsigned int magic) {
   pic_remap(32, 39);
   irq_clear_mask(0); //make sure timer is enabled
   setup_irq_handler(0, clock_handler);
-  //irq_clear_mask(1); //make sure keyboard is enabled
+  irq_clear_mask(1); //make sure keyboard is enabled
+  setup_irq_handler(1, read_keypress);
   init_pit(CLOCK_INTERVAL_MS); //setup PIT to fire every CLOCK_INTERVAL_MS seconds
 
 
